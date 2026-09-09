@@ -5,56 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idoo | Web Developer</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Silkscreen&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- FILE AUDIO KERETA / MUSIKkamu -->
-    <!-- Ganti 'audio-kereta.mp3' dengan nama file mp3 kamu -->
+    <!-- Audio Player (Otomatis Loop) -->
     <audio id="train-audio" src="audio-kereta.mp3" loop></audio>
 
-    <!-- SCREEN 1: LAYAR LOGIN RETRO TERMINAL -->
-    <div id="login-screen" class="login-overlay">
-        <div class="terminal-box">
-            <div class="terminal-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="terminal-title">SYSTEM_LOGIN.EXE</span>
-            </div>
-            <div class="terminal-body">
-                <p class="sys-msg">&gt; INITIALIZING EXPRESS TRAIN SYSTEM...</p>
-                <p class="sys-msg">&gt; CONNECTING TO SERVER [IDOO-NET]... OK.</p>
-                <br>
-                <div class="input-line">
-                    <span class="prompt">Username:</span>
-                    <span id="user-text"></span><span id="cursor-user" class="cursor">_</span>
-                </div>
-                <div id="pass-row" class="input-line hidden">
-                    <span class="prompt">Password:</span>
-                    <span id="pass-text"></span><span id="cursor-pass" class="cursor">_</span>
-                </div>
-                
-                <!-- TOMBOL LOGIN MANUAL -->
-                <div id="login-btn-container" class="login-btn-wrapper hidden">
-                    <button id="login-btn" onclick="executeLogin()">[ PRESS ENTER / CLICK TO LOGIN ]</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 2: UTAMA (PORTOFOLIO KERETA) -->
+    <!-- Background Video Kereta (Statis Tanpa Getar) -->
     <video id="bg-video" autoplay loop muted playsinline class="bg-video">
         <source src="bg3-idoo.mp4" type="video/mp4">
     </video>
 
     <div class="overlay"></div>
 
+    <!-- SCREEN 1: LAYAR LOGIN SESUAI GAMBAR TIKTOK -->
+    <div id="login-screen" class="login-overlay">
+        <div class="login-card">
+            <!-- Icon User Avatar di Atas -->
+            <div class="avatar-circle">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <!-- Input Username -->
+            <div class="input-pill">
+                <span id="user-text"></span><span id="cursor-user" class="cursor">|</span>
+            </div>
+
+            <!-- Input Password -->
+            <div class="input-pill">
+                <span id="pass-text"></span><span id="cursor-pass" class="cursor hidden">|</span>
+            </div>
+
+            <!-- Tombol Login (Muncul Setelah Ngetik Selesai) -->
+            <button id="login-btn" class="login-btn hidden" onclick="executeLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: UTAMA (PORTOFOLIO DI KACA JENDELA) -->
     <main class="window-content">
         <div class="pill-badge">
             <span>Building robust web interfaces with product-level clarity</span>
@@ -75,6 +71,7 @@
         </div>
     </main>
 
+    <!-- Bottom Floating Bar -->
     <footer class="bottom-bar">
         <div class="bar-pill">
             <span class="bold">Home.</span>
@@ -88,17 +85,16 @@
         </div>
     </footer>
 
-    <!-- SCRIPT AUTO-TYPING & LOGIC SOUND -->
+    <!-- Script Logic Auto-Typing & Login -->
     <script>
         const usernameTarget = "dadidudedo67";
-        const passwordTarget = "********";
+        const passwordTarget = "************";
 
         const userText = document.getElementById("user-text");
         const passText = document.getElementById("pass-text");
         const cursorUser = document.getElementById("cursor-user");
         const cursorPass = document.getElementById("cursor-pass");
-        const passRow = document.getElementById("pass-row");
-        const loginBtnContainer = document.getElementById("login-btn-container");
+        const loginBtn = document.getElementById("login-btn");
         const loginScreen = document.getElementById("login-screen");
         const audio = document.getElementById("train-audio");
 
@@ -111,8 +107,8 @@
                 uIndex++;
                 setTimeout(typeUsername, 90);
             } else {
-                cursorUser.style.display = "none";
-                passRow.classList.remove("hidden");
+                cursorUser.classList.add("hidden");
+                cursorPass.classList.remove("hidden");
                 setTimeout(typePassword, 300);
             }
         }
@@ -123,32 +119,29 @@
                 pIndex++;
                 setTimeout(typePassword, 80);
             } else {
-                cursorPass.style.display = "none";
-                // Munculkan tombol LOGIN setelah selesai ngetik
+                cursorPass.classList.add("hidden");
+                // Tampilkan Tombol Login setelah selesai mengetik
                 setTimeout(() => {
-                    loginBtnContainer.classList.remove("hidden");
-                }, 400);
+                    loginBtn.classList.remove("hidden");
+                }, 300);
             }
         }
 
-        // FUNGSI SAAT TOMBOL LOGIN DIKLIK
         function executeLogin() {
-            // Play Audio MP3
+            // Play Audio saat Login diklik
             audio.play().catch(err => console.log("Audio play error:", err));
 
-            // Transisi Layar Login
+            // Transisi Hilang
             loginScreen.classList.add("fade-out");
             setTimeout(() => {
                 loginScreen.style.display = "none";
             }, 800);
         }
 
-        // Jalankan auto ngetik saat web dibuka
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(typeUsername, 600);
         });
 
-        // Toggle On/Off Suara lewat Floating Bar di Bawah
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();
