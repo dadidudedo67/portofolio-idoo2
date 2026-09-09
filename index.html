@@ -5,55 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idoo | Web Developer</title>
     
-    <!-- Google Fonts: Pixel (Silkscreen) & Modern Sans (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Silkscreen&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Video Latar Belakang Kereta Interior -->
+    <!-- FILE AUDIO KERETA / MUSIKkamu -->
+    <!-- Ganti 'audio-kereta.mp3' dengan nama file mp3 kamu -->
+    <audio id="train-audio" src="audio-kereta.mp3" loop></audio>
+
+    <!-- SCREEN 1: LAYAR LOGIN RETRO TERMINAL -->
+    <div id="login-screen" class="login-overlay">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">SYSTEM_LOGIN.EXE</span>
+            </div>
+            <div class="terminal-body">
+                <p class="sys-msg">&gt; INITIALIZING EXPRESS TRAIN SYSTEM...</p>
+                <p class="sys-msg">&gt; CONNECTING TO SERVER [IDOO-NET]... OK.</p>
+                <br>
+                <div class="input-line">
+                    <span class="prompt">Username:</span>
+                    <span id="user-text"></span><span id="cursor-user" class="cursor">_</span>
+                </div>
+                <div id="pass-row" class="input-line hidden">
+                    <span class="prompt">Password:</span>
+                    <span id="pass-text"></span><span id="cursor-pass" class="cursor">_</span>
+                </div>
+                
+                <!-- TOMBOL LOGIN MANUAL -->
+                <div id="login-btn-container" class="login-btn-wrapper hidden">
+                    <button id="login-btn" onclick="executeLogin()">[ PRESS ENTER / CLICK TO LOGIN ]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: UTAMA (PORTOFOLIO KERETA) -->
     <video id="bg-video" autoplay loop muted playsinline class="bg-video">
         <source src="bg3-idoo.mp4" type="video/mp4">
-        Browser kamu tidak mendukung video background.
     </video>
 
-    <!-- Overlay Tipis -->
     <div class="overlay"></div>
 
-    <!-- Container Utama (Area Teks di Tengah Jendela) -->
     <main class="window-content">
-        
-        <!-- Pill Top Subtitle -->
         <div class="pill-badge">
             <span>Building robust web interfaces with product-level clarity</span>
         </div>
 
-        <!-- Big Pixel Title -->
         <h1 class="pixel-title">HI! I AM IDOO</h1>
 
-        <!-- Subtitle Description -->
         <p class="description">
             A high school student & creative web developer with hands-on UI/UX experience, 
             building functional applications from initial idea to production-style interfaces.
         </p>
 
-        <!-- Navigation Pills Inside Window -->
         <div class="nav-pills">
             <a href="#about" class="pill-btn">01 About <i class="fa-solid fa-arrow-right"></i></a>
             <a href="#work" class="pill-btn">02 Work <i class="fa-solid fa-arrow-right"></i></a>
             <a href="https://www.smktunasmedia.sch.id" target="_blank" class="pill-btn">03 School <i class="fa-solid fa-arrow-right"></i></a>
             <a href="#contact" class="pill-btn">04 Contact <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-
     </main>
 
-    <!-- Bottom Floating Bar -->
     <footer class="bottom-bar">
         <div class="bar-pill">
             <span class="bold">Home.</span>
@@ -63,14 +84,77 @@
             <span class="divider">/</span>
             <a href="https://tiktok.com/@idho979" target="_blank">tiktok</a>
             <span class="divider">/</span>
-            <button id="sound-btn" onclick="toggleSound()">sound on/off</button>
+            <button id="sound-btn" onclick="toggleAudio()">sound on/off</button>
         </div>
     </footer>
 
+    <!-- SCRIPT AUTO-TYPING & LOGIC SOUND -->
     <script>
-        function toggleSound() {
-            const video = document.getElementById('bg-video');
-            video.muted = !video.muted;
+        const usernameTarget = "dadidudedo67";
+        const passwordTarget = "********";
+
+        const userText = document.getElementById("user-text");
+        const passText = document.getElementById("pass-text");
+        const cursorUser = document.getElementById("cursor-user");
+        const cursorPass = document.getElementById("cursor-pass");
+        const passRow = document.getElementById("pass-row");
+        const loginBtnContainer = document.getElementById("login-btn-container");
+        const loginScreen = document.getElementById("login-screen");
+        const audio = document.getElementById("train-audio");
+
+        let uIndex = 0;
+        let pIndex = 0;
+
+        function typeUsername() {
+            if (uIndex < usernameTarget.length) {
+                userText.textContent += usernameTarget.charAt(uIndex);
+                uIndex++;
+                setTimeout(typeUsername, 90);
+            } else {
+                cursorUser.style.display = "none";
+                passRow.classList.remove("hidden");
+                setTimeout(typePassword, 300);
+            }
+        }
+
+        function typePassword() {
+            if (pIndex < passwordTarget.length) {
+                passText.textContent += passwordTarget.charAt(pIndex);
+                pIndex++;
+                setTimeout(typePassword, 80);
+            } else {
+                cursorPass.style.display = "none";
+                // Munculkan tombol LOGIN setelah selesai ngetik
+                setTimeout(() => {
+                    loginBtnContainer.classList.remove("hidden");
+                }, 400);
+            }
+        }
+
+        // FUNGSI SAAT TOMBOL LOGIN DIKLIK
+        function executeLogin() {
+            // Play Audio MP3
+            audio.play().catch(err => console.log("Audio play error:", err));
+
+            // Transisi Layar Login
+            loginScreen.classList.add("fade-out");
+            setTimeout(() => {
+                loginScreen.style.display = "none";
+            }, 800);
+        }
+
+        // Jalankan auto ngetik saat web dibuka
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(typeUsername, 600);
+        });
+
+        // Toggle On/Off Suara lewat Floating Bar di Bawah
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
         }
     </script>
 </body>
