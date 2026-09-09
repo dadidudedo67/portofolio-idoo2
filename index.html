@@ -20,17 +20,23 @@
     <!-- Audio Player (Otomatis Loop) -->
     <audio id="train-audio" src="audio-kereta.mp3" loop></audio>
 
-    <!-- Background Video Kereta (Statis Tanpa Getar) -->
-    <video id="bg-video" autoplay loop muted playsinline class="bg-video">
-        <source src="bg3-idoo.mp4" type="video/mp4">
-    </video>
+    <!-- BACKGROUND VIDEO SEAMLESS DUAL-BUFFER (Biar Ga Kelihatan Patah Pas Loop) -->
+    <div class="video-container">
+        <video id="bg-video-1" autoplay muted playsinline class="bg-video active">
+            <source src="bg3-idoo.mp4" type="video/mp4">
+        </video>
+        <video id="bg-video-2" muted playsinline class="bg-video">
+            <source src="bg3-idoo.mp4" type="video/mp4">
+        </video>
+    </div>
 
+    <!-- Vignette / Dark Overlay Halus -->
     <div class="overlay"></div>
 
-    <!-- SCREEN 1: LAYAR LOGIN SESUAI GAMBAR TIKTOK -->
+    <!-- SCREEN 1: LAYAR LOGIN -->
     <div id="login-screen" class="login-overlay">
         <div class="login-card">
-            <!-- Icon User Avatar di Atas -->
+            <!-- Icon User Avatar -->
             <div class="avatar-circle">
                 <i class="fa-regular fa-user"></i>
             </div>
@@ -45,7 +51,7 @@
                 <span id="pass-text"></span><span id="cursor-pass" class="cursor hidden">|</span>
             </div>
 
-            <!-- Tombol Login (Muncul Setelah Ngetik Selesai) -->
+            <!-- Tombol Login -->
             <button id="login-btn" class="login-btn hidden" onclick="executeLogin()">Login</button>
         </div>
     </div>
@@ -85,8 +91,38 @@
         </div>
     </footer>
 
-    <!-- Script Logic Auto-Typing & Login -->
+    <!-- Script Logic Auto-Typing, Audio, & Seamless Video Loop -->
     <script>
+        // --- LOGIC SEAMLESS VIDEO LOOP (CROSSFADE DUAL VIDEO) ---
+        const v1 = document.getElementById('bg-video-1');
+        const v2 = document.getElementById('bg-video-2');
+        let currentVideo = v1;
+        let nextVideo = v2;
+
+        function handleVideoLoop(activeVid, inactiveVid) {
+            // Pas sisa 0.8 detik sebelum video habis, siapin video kedua
+            const checkTime = () => {
+                if (activeVid.duration - activeVid.currentTime <= 0.8) {
+                    activeVid.removeEventListener('timeupdate', checkTime);
+                    
+                    inactiveVid.currentTime = 0;
+                    inactiveVid.play();
+                    
+                    inactiveVid.classList.add('active');
+                    activeVid.classList.remove('active');
+
+                    // Switch role video
+                    setTimeout(() => {
+                        handleVideoLoop(inactiveVid, activeVid);
+                    }, 1000);
+                }
+            };
+            activeVid.addEventListener('timeupdate', checkTime);
+        }
+        handleVideoLoop(v1, v2);
+
+
+        // --- LOGIC AUTO TYPING & LOGIN ---
         const usernameTarget = "dadidudedo67";
         const passwordTarget = "************";
 
@@ -120,7 +156,6 @@
                 setTimeout(typePassword, 80);
             } else {
                 cursorPass.classList.add("hidden");
-                // Tampilkan Tombol Login setelah selesai mengetik
                 setTimeout(() => {
                     loginBtn.classList.remove("hidden");
                 }, 300);
@@ -128,10 +163,8 @@
         }
 
         function executeLogin() {
-            // Play Audio saat Login diklik
             audio.play().catch(err => console.log("Audio play error:", err));
 
-            // Transisi Hilang
             loginScreen.classList.add("fade-out");
             setTimeout(() => {
                 loginScreen.style.display = "none";
