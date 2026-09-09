@@ -19,40 +19,56 @@ body {
     background-color: #000;
 }
 
-/* --- FULLSCREEN VIDEO BACKGROUND --- */
-.bg-video {
+/* --- SEAMLESS VIDEO BACKGROUND CONTAINER --- */
+.video-container {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.bg-video {
+    position: absolute;
     top: 50%;
     left: 50%;
     min-width: 100vw;
     min-height: 100vh;
     width: 100vw;
     height: 100vh;
-    z-index: -2;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out; /* Efek Crossfade Mulus */
 }
 
+.bg-video.active {
+    opacity: 1;
+}
+
+/* Overlay Vignet / Penyamar Pinggiran */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.2);
+    background: radial-gradient(circle, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.5) 100%);
     z-index: -1;
 }
 
-/* --- SCREEN 1: LAYAR LOGIN KARTU ABU-ABU PERSIS GAMBAR --- */
+/* --- SCREEN 1: LAYAR LOGIN --- */
 .login-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(230, 230, 230, 0.6); /* Background abu-abu terang semitransparan */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(200, 205, 215, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -66,22 +82,20 @@ body {
     visibility: hidden;
 }
 
-/* Card Login Utama */
 .login-card {
     position: relative;
     width: 100%;
     max-width: 320px;
-    background: rgba(138, 145, 158, 0.85); /* Warna abu-abu sedang sesuai sampel */
+    background: rgba(138, 145, 158, 0.85);
     border-radius: 20px;
     padding: 35px 24px 24px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Avatar Icon Lingkaran di Atas Kartu */
 .avatar-circle {
     position: absolute;
     top: -26px;
@@ -97,7 +111,6 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input Form Pill Putih */
 .input-pill {
     width: 100%;
     height: 38px;
@@ -112,7 +125,6 @@ body {
     padding: 0 15px;
 }
 
-/* Tombol Login Pill */
 .login-btn {
     width: 110px;
     height: 36px;
@@ -133,7 +145,6 @@ body {
     transform: scale(1.03);
 }
 
-/* Cursor Ngetik */
 .cursor {
     color: #1e293b;
     margin-left: 2px;
@@ -149,7 +160,7 @@ body {
     display: none !important;
 }
 
-/* --- SCREEN 2: CONTENT PORTOFOLIO UTAMA --- */
+/* --- SCREEN 2: PORTOFOLIO UTAMA --- */
 .window-content {
     max-width: 680px;
     padding: 0 20px;
@@ -235,7 +246,7 @@ body {
     transform: translateX(3px);
 }
 
-/* --- FLOATING BAR DI BAWAH --- */
+/* --- FLOATING BAR --- */
 .bottom-bar {
     position: fixed;
     bottom: 25px;
