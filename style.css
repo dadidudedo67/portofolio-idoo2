@@ -19,21 +19,159 @@ body {
     background-color: #000;
 }
 
-/* --- Fullscreen Video Background --- */
+/* --- SCREEN 1: LOGIN RETRO TERMINAL --- */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050811;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.login-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.terminal-box {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(10, 15, 29, 0.95);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+    overflow: hidden;
+    font-family: 'VT323', monospace;
+}
+
+.terminal-header {
+    background: rgba(20, 28, 48, 0.9);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-title {
+    font-size: 0.9rem;
+    color: #8a99ad;
+    margin-left: 6px;
+    letter-spacing: 1px;
+}
+
+.terminal-body {
+    padding: 20px;
+    color: #00e5ff;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.sys-msg {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.prompt {
+    color: #ffffff;
+}
+
+.cursor {
+    color: #00e5ff;
+    animation: blink 0.6s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Style Tombol Login Terminal */
+.login-btn-wrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#login-btn {
+    background: rgba(0, 229, 255, 0.15);
+    border: 1px solid #00e5ff;
+    color: #00e5ff;
+    padding: 10px 20px;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+#login-btn:hover {
+    background: #00e5ff;
+    color: #050811;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* --- SCREEN 2: FULLSCREEN VIDEO BACKGROUND WITH TRAIN SHAKE --- */
 .bg-video {
     position: fixed;
     top: 50%;
     left: 50%;
-    min-width: 100vw;
-    min-height: 100vh;
-    width: 100vw;
-    height: 100vh;
+    min-width: 105vw;
+    min-height: 105vh;
+    width: 105vw;
+    height: 105vh;
     z-index: -2;
-    transform: translate(-50%, -50%);
     object-fit: cover;
+    animation: trainShake 0.18s infinite alternate ease-in-out;
 }
 
-/* Gelapkan sedikit jika video terlalu terang */
+/* Animasi Getaran Halus Kereta Berjalan */
+@keyframes trainShake {
+    0% {
+        transform: translate(-50%, -50%) translate(0px, 0px) rotate(0deg);
+    }
+    25% {
+        transform: translate(-50%, -50%) translate(1.2px, -1.5px) rotate(0.1deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) translate(-1px, 1px) rotate(-0.1deg);
+    }
+    75% {
+        transform: translate(-50%, -50%) translate(1.5px, 0.8px) rotate(0.05deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(-1.2px, -1px) rotate(-0.05deg);
+    }
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -56,7 +194,6 @@ body {
     z-index: 10;
 }
 
-/* Badge Oval Atas */
 .pill-badge {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
@@ -70,7 +207,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Judul Utama Pixel (Persis gambar "HI! I AM LYHOUR") */
 .pixel-title {
     font-family: 'Silkscreen', cursive;
     font-size: 3rem;
@@ -82,7 +218,6 @@ body {
     margin: 0.2rem 0;
 }
 
-/* Deskripsi Teks Tengah */
 .description {
     font-size: 0.88rem;
     line-height: 1.6;
@@ -92,7 +227,6 @@ body {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* Navigasi Pill Kaca (01 About, 02 Work, dst) */
 .nav-pills {
     display: flex;
     gap: 0.8rem;
@@ -155,18 +289,9 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.bar-pill .bold {
-    font-weight: 700;
-}
-
-.bar-pill .location {
-    color: #555;
-    font-size: 0.75rem;
-}
-
-.bar-pill .divider {
-    color: #aaa;
-}
+.bar-pill .bold { font-weight: 700; }
+.bar-pill .location { color: #555; font-size: 0.75rem; }
+.bar-pill .divider { color: #aaa; }
 
 .bar-pill a, .bar-pill button {
     color: #333;
@@ -185,25 +310,10 @@ body {
 
 /* Responsif untuk HP */
 @media (max-width: 600px) {
-    .pixel-title {
-        font-size: 2.1rem;
-    }
-    
-    .description {
-        font-size: 0.8rem;
-    }
-
-    .pill-badge {
-        font-size: 0.7rem;
-    }
-
-    .bar-pill {
-        font-size: 0.7rem;
-        padding: 0.45rem 1rem;
-        gap: 0.4rem;
-    }
-
-    .bar-pill .location {
-        display: none;
-    }
+    .pixel-title { font-size: 2.1rem; }
+    .description { font-size: 0.8rem; }
+    .pill-badge { font-size: 0.7rem; }
+    .bar-pill { font-size: 0.7rem; padding: 0.45rem 1rem; gap: 0.4rem; }
+    .bar-pill .location { display: none; }
+    .terminal-box { max-width: 90%; }
 }
