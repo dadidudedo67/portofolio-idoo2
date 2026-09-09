@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Idoo - Retro Train Edition</title>
+    
+    <!-- Google Fonts: Retro Cyberpunk & Pixel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- File CSS External -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Video Background Kereta -->
+    <video id="bg-video" autoplay loop muted playsinline class="bg-video">
+        <source src="bg3-idoo.mp4" type="video/mp4">
+        Browser kamu tidak mendukung tag video.
+    </video>
+
+    <!-- Overlay Dark Sinematik -->
+    <div class="bg-overlay"></div>
+
+    <!-- Container Kontrol Kanan Atas -->
+    <div class="top-right-controls">
+        <div class="class-badge">
+            <i class="fa-solid fa-train-subway"></i>
+            <span>TRAIN VIBE / PELAJAR</span>
+        </div>
+        
+        <!-- Tombol Suara ON/OFF -->
+        <button id="sound-btn" class="sound-toggle-btn" onclick="toggleSound()">
+            <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
+            <span id="sound-text">SOUND OFF</span>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="theme-tag">
+            <i class="fa-solid fa-train train-badge-icon"></i> Night Express Theme
+        </div>
+        
+        <!-- Judul Animasi Ketik (Typewriter Retro) -->
+        <h1 class="moving-title">
+            <span id="typewriter-text"></span><span class="cursor">_</span>
+            <i class="fa-solid fa-train-subway train-heading-icon"></i>
+        </h1>
+        
+        <p class="subtitle">&gt; Web Developer & Creative Designer _</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Section: Tentang Saya -->
+        <div class="glass-card retro-card">
+            <details open>
+                <summary>
+                    <div class="card-header">
+                        <i class="fa-solid fa-compass icon neon-accent"></i>
+                        <h2>[ Tentang Saya ]</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </summary>
+                <div class="details-content">
+                    <p class="about-desc">
+                        Halo! Saya Idoo, seorang pengembang web dan desainer kreatif yang berfokus pada antarmuka modern, interaktif, serta bernuansa estetik ala perjalanan kereta malam & gaya retro cyberpunk.
+                    </p>
+                    <div class="info-grid">
+                        
+                        <!-- Kolom Sekolah -->
+                        <div class="info-item school-card-item">
+                            <i class="fa-solid fa-school icon-neon"></i>
+                            <div class="school-card-body">
+                                <strong>Status & Pendidikan</strong>
+                                <a href="https://www.smktunasmedia.sch.id" target="_blank" class="school-button">
+                                    <div class="school-info">
+                                        <span class="school-name">SMK Tunas Media</span>
+                                        <span class="school-sub">Kunjungi Situs Resmi</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square school-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Kolom Sosial Media -->
+                        <div class="info-item">
+                            <i class="fa-solid fa-share-nodes icon-neon"></i>
+                            <div>
+                                <strong>Sosial Media</strong>
+                                <div class="social-links">
+                                    <a href="https://instagram.com/idhokml" target="_blank" class="social-btn ig">
+                                        <i class="fa-brands fa-instagram"></i>
+                                        <span>@idhokml</span>
+                                    </a>
+                                    <a href="https://tiktok.com/@idho979" target="_blank" class="social-btn tt">
+                                        <i class="fa-brands fa-tiktok"></i>
+                                        <span>@idho979</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Section: Proyek Saya -->
+        <div class="glass-card retro-card">
+            <div class="card-header-static">
+                <div class="header-title">
+                    <i class="fa-solid fa-terminal icon neon-accent"></i>
+                    <h2>[ Proyek Saya ]</h2>
+                </div>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="card-watermark"><i class="fa-solid fa-train"></i></div>
+                    <span class="project-tag">WEB DESIGN</span>
+                    <h3><i class="fa-solid fa-folder-open"></i> Interactive Portfolio</h3>
+                    <p>Website portofolio interaktif berbasis HTML & CSS dengan efek latar belakang video perjalanan kereta dan gaya retro cyberpunk.</p>
+                </div>
+                <div class="project-card">
+                    <div class="card-watermark"><i class="fa-solid fa-laptop-code"></i></div>
+                    <span class="project-tag">CREATIVE UI</span>
+                    <h3><i class="fa-solid fa-display"></i> Modern Interface</h3>
+                    <p>Konsep antarmuka bersih bernuansa estetik dan futuristic glassmorphism untuk aplikasi masa depan.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Idoo. Dibuat dengan <i class="fa-solid fa-train-subway footer-icon"></i> & <span>CSS3 / HTML5</span></p>
+    </footer>
+
+    <!-- Script Suara & Animasi Ketik Smooth -->
+    <script>
+        // Script Suara Video Background
+        function toggleSound() {
+            const video = document.getElementById('bg-video');
+            const icon = document.getElementById('sound-icon');
+            const text = document.getElementById('sound-text');
+            const btn = document.getElementById('sound-btn');
+
+            if (video.muted) {
+                video.muted = false;
+                video.play();
+                icon.className = "fa-solid fa-volume-high";
+                text.innerText = "SOUND ON";
+                btn.classList.add("active");
+            } else {
+                video.muted = true;
+                icon.className = "fa-solid fa-volume-xmark";
+                text.innerText = "SOUND OFF";
+                btn.classList.remove("active");
+            }
+        }
+
+        // Script Animasi Ketik Typewriter Retro Smooth
+        const textElement = document.getElementById("typewriter-text");
+        
+        const phrase1 = ["H","a","l","o",","," ","S","a","y","a"," ", '<span class="ice-text">I','d','o','o</span>'];
+        const phrase2 = ["W","e","b"," ","D","e","s","i","g","n","e","r"];
+        
+        const phrases = [phrase1, phrase2];
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentArray = phrases[phraseIndex];
+
+            if (isDeleting) {
+                charIndex--;
+            } else {
+                charIndex++;
+            }
+
+            textElement.innerHTML = currentArray.slice(0, charIndex).join("");
+
+            let typingSpeed = isDeleting ? 35 : 75;
+
+            if (!isDeleting && charIndex === currentArray.length) {
+                typingSpeed = 2200;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingSpeed = 400;
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", typeEffect);
+    </script>
+</body>
+</html>
