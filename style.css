@@ -254,7 +254,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* --- ABOUT SECTION (SEKSI KEDUA GESER KE BAWAH) --- */
+/* --- ABOUT SECTION --- */
 .about-section {
     width: 100%;
     min-height: 100vh;
@@ -354,59 +354,80 @@ body {
     transform: translateY(-2px);
 }
 
-/* Right Side Photo Card */
+/* --- SISI KANAN: KARTU FOTO DENGAN HOVER RGB WARNA-WARNI ROTATING --- */
 .about-right {
     flex: 0 0 340px;
     display: flex;
     justify-content: center;
 }
 
-/* Wrapper Kartu Foto untuk Animasi RGB Border Warna-Warni */
+/* Container Luar dengan Animasi Garis RGB Berputar */
 .profile-card-wrapper {
     position: relative;
     border-radius: 24px;
-    padding: 3px;
+    padding: 3px; /* Ketebalan Garis Lampu RGB */
     background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
     transition: all 0.4s ease;
 }
 
-/* Efek Hover RGB Glow Warna-Warni */
+/* Conic Gradient RGB Berputar di Belakang Kartu */
 .profile-card-wrapper::before {
     content: '';
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 26px;
-    background: linear-gradient(45deg, #ff0055, #7600ff, #00e5ff, #00ff66, #ff0055);
-    background-size: 400%;
-    z-index: -1;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        #ff0055,
+        #7600ff,
+        #00e5ff,
+        #00ff66,
+        #ffea00,
+        #ff0055
+    );
     opacity: 0;
     transition: opacity 0.4s ease;
-    filter: blur(10px);
+    animation: rotateRGB 4s linear infinite;
+    z-index: 1;
 }
 
-.profile-card-wrapper:hover::before {
+/* Glow Pancaran Cahaya RGB saat Hover */
+.profile-card-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(45deg, #ff0055, #7600ff, #00e5ff, #00ff66);
+    filter: blur(15px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+/* EFEK HOVER: Lampu RGB Nyala Mutar 360 Derajat */
+.profile-card-wrapper:hover::before,
+.profile-card-wrapper:hover::after {
     opacity: 1;
-    animation: rgbGlow 6s linear infinite;
 }
 
-@keyframes rgbGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes rotateRGB {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Kartu Foto Utama */
+/* Kartu Utama Di Depan Layer RGB */
 .profile-card {
-    background: #0f172a;
-    border-radius: 22px;
+    position: relative;
+    z-index: 2;
+    background: #0d1322;
+    border-radius: 21px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .img-box {
@@ -415,9 +436,10 @@ body {
     border-radius: 16px;
     overflow: hidden;
     position: relative;
+    background: #1e293b;
 }
 
-/* Foto Default (Monochrome / Hitam Putih) */
+/* FOTO AWAL: Hitam-Putih (Monochrome) */
 .profile-img {
     width: 100%;
     height: 100%;
@@ -426,10 +448,10 @@ body {
     transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-/* Hover Foto -> Berubah Warna-Warni / Full Color */
+/* HOVER: Foto Berubah Jadi BERWARNA ASLI + Zoom In */
 .profile-card-wrapper:hover .profile-img {
     filter: grayscale(0%) contrast(1);
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .profile-info {
@@ -441,6 +463,7 @@ body {
 .profile-info h3 {
     font-size: 1.25rem;
     font-weight: 600;
+    color: #ffffff;
 }
 
 .profile-info .role {
@@ -455,7 +478,7 @@ body {
     margin-top: 6px;
     font-size: 0.75rem;
     color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
+    background: rgba(56, 189, 248, 0.12);
     padding: 6px 12px;
     border-radius: 50px;
     width: fit-content;
@@ -469,7 +492,7 @@ body {
     box-shadow: 0 0 8px #38bdf8;
 }
 
-/* --- FLOATING BAR DI BAHAW --- */
+/* --- FLOATING BAR DI BAWAH --- */
 .bottom-bar {
     position: fixed;
     bottom: 25px;
