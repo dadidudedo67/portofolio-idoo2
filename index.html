@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Silkscreen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,7 +20,7 @@
     <!-- Audio Player (Otomatis Loop) -->
     <audio id="train-audio" src="audio-kereta.mp3" loop></audio>
 
-    <!-- BACKGROUND VIDEO SEAMLESS DUAL-BUFFER (Biar Ga Kelihatan Patah Pas Loop) -->
+    <!-- BACKGROUND VIDEO SEAMLESS DUAL-BUFFER -->
     <div class="video-container">
         <video id="bg-video-1" autoplay muted playsinline class="bg-video active">
             <source src="bg3-idoo.mp4" type="video/mp4">
@@ -30,52 +30,96 @@
         </video>
     </div>
 
-    <!-- Vignette / Dark Overlay Halus -->
     <div class="overlay"></div>
 
     <!-- SCREEN 1: LAYAR LOGIN -->
     <div id="login-screen" class="login-overlay">
         <div class="login-card">
-            <!-- Icon User Avatar -->
             <div class="avatar-circle">
                 <i class="fa-regular fa-user"></i>
             </div>
-
-            <!-- Input Username -->
             <div class="input-pill">
                 <span id="user-text"></span><span id="cursor-user" class="cursor">|</span>
             </div>
-
-            <!-- Input Password -->
             <div class="input-pill">
                 <span id="pass-text"></span><span id="cursor-pass" class="cursor hidden">|</span>
             </div>
-
-            <!-- Tombol Login -->
             <button id="login-btn" class="login-btn hidden" onclick="executeLogin()">Login</button>
         </div>
     </div>
 
-    <!-- SCREEN 2: UTAMA (PORTOFOLIO DI KACA JENDELA) -->
-    <main class="window-content">
-        <div class="pill-badge">
-            <span>Building robust web interfaces with product-level clarity</span>
-        </div>
+    <!-- MAIN CONTAINER (Bisa Di-scroll Ke Bawah) -->
+    <div class="main-wrapper">
+        
+        <!-- HERO SECTION (Tampilan Awal di Kaca Jendela Kereta) -->
+        <section class="hero-section">
+            <div class="window-content">
+                <div class="pill-badge">
+                    <span>Building robust web interfaces with product-level clarity</span>
+                </div>
 
-        <h1 class="pixel-title">HI! I AM IDOO</h1>
+                <h1 class="pixel-title">HI! I AM IDOO</h1>
 
-        <p class="description">
-            A high school student & creative web developer with hands-on UI/UX experience, 
-            building functional applications from initial idea to production-style interfaces.
-        </p>
+                <p class="description">
+                    A high school student & creative web developer with hands-on UI/UX experience, 
+                    building functional applications from initial idea to production-style interfaces.
+                </p>
 
-        <div class="nav-pills">
-            <a href="#about" class="pill-btn">01 About <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#work" class="pill-btn">02 Work <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="https://www.smktunasmedia.sch.id" target="_blank" class="pill-btn">03 School <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#contact" class="pill-btn">04 Contact <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-    </main>
+                <div class="nav-pills">
+                    <a href="#about" class="pill-btn">01 About <i class="fa-solid fa-arrow-down"></i></a>
+                    <a href="#work" class="pill-btn">02 Work <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="https://www.smktunasmedia.sch.id" target="_blank" class="pill-btn">03 School <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#contact" class="pill-btn">04 Contact <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION (Seksi Geser Ke Bawah tentang Kamu) -->
+        <section id="about" class="about-section">
+            <div class="about-container">
+                
+                <!-- SISI KIRI: DESKRIPSI & PERKENALAN -->
+                <div class="about-left">
+                    <div class="quote-pill">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <span>"Keep building, keep innovating through code."</span>
+                    </div>
+
+                    <h2 class="about-title">Siswa SMK Tunas Media & Creative Web Developer</h2>
+
+                    <p class="about-desc">
+                        Halo! Gua Idoo, seorang siswa SMK Tunas Media yang berfokus pada pengembangan web modern, desain antarmuka interaktif (UI/UX), dan pembuatan aplikasi web yang responsif. Berpengalaman membangun berbagai antarmuka website dari ide awal hingga siap digunakan dengan performa yang rapi dan estetis.
+                    </p>
+
+                    <div class="about-actions">
+                        <a href="#contact" class="action-btn primary">Contact Me</a>
+                        <a href="#work" class="action-btn secondary">Explore My Projects</a>
+                    </div>
+                </div>
+
+                <!-- SISI KANAN: KARTU FOTO DENGAN HOVER WARNA-WARNI (RGB NEON) -->
+                <div class="about-right">
+                    <div class="profile-card-wrapper">
+                        <div class="profile-card">
+                            <div class="img-box">
+                                <!-- Ganti foto-profile.jpg dengan nama file fotomu -->
+                                <img src="foto-profile.jpg" alt="Foto Profile Idoo" class="profile-img">
+                            </div>
+                            <div class="profile-info">
+                                <h3>Idoo</h3>
+                                <p class="role">Web Developer & Student</p>
+                                <div class="status-tag">
+                                    <span class="status-dot"></span> Online / Available for projects
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
 
     <!-- Bottom Floating Bar -->
     <footer class="bottom-bar">
@@ -91,27 +135,20 @@
         </div>
     </footer>
 
-    <!-- Script Logic Auto-Typing, Audio, & Seamless Video Loop -->
+    <!-- Script Logic -->
     <script>
-        // --- LOGIC SEAMLESS VIDEO LOOP (CROSSFADE DUAL VIDEO) ---
+        // Seamless Video Loop
         const v1 = document.getElementById('bg-video-1');
         const v2 = document.getElementById('bg-video-2');
-        let currentVideo = v1;
-        let nextVideo = v2;
 
         function handleVideoLoop(activeVid, inactiveVid) {
-            // Pas sisa 0.8 detik sebelum video habis, siapin video kedua
             const checkTime = () => {
                 if (activeVid.duration - activeVid.currentTime <= 0.8) {
                     activeVid.removeEventListener('timeupdate', checkTime);
-                    
                     inactiveVid.currentTime = 0;
                     inactiveVid.play();
-                    
                     inactiveVid.classList.add('active');
                     activeVid.classList.remove('active');
-
-                    // Switch role video
                     setTimeout(() => {
                         handleVideoLoop(inactiveVid, activeVid);
                     }, 1000);
@@ -121,8 +158,7 @@
         }
         handleVideoLoop(v1, v2);
 
-
-        // --- LOGIC AUTO TYPING & LOGIN ---
+        // Auto Typing & Login
         const usernameTarget = "dadidudedo67";
         const passwordTarget = "************";
 
@@ -164,7 +200,6 @@
 
         function executeLogin() {
             audio.play().catch(err => console.log("Audio play error:", err));
-
             loginScreen.classList.add("fade-out");
             setTimeout(() => {
                 loginScreen.style.display = "none";
