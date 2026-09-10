@@ -20,7 +20,7 @@
     <!-- Audio Player (Otomatis Loop) -->
     <audio id="train-audio" src="audio-kereta.mp3" loop></audio>
 
-    <!-- BACKGROUND VIDEO SEAMLESS DUAL-BUFFER -->
+    <!-- BACKGROUND VIDEO SEAMLESS DUAL-BUFFER (Biar Loop Halus Tanpa Patah) -->
     <div class="video-container">
         <video id="bg-video-1" autoplay muted playsinline class="bg-video active">
             <source src="bg3-idoo.mp4" type="video/mp4">
@@ -30,28 +30,36 @@
         </video>
     </div>
 
+    <!-- Overlay Vignette Dark Halus -->
     <div class="overlay"></div>
 
-    <!-- SCREEN 1: LAYAR LOGIN -->
+    <!-- SCREEN 1: LAYAR LOGIN TIKTOK STYLE -->
     <div id="login-screen" class="login-overlay">
         <div class="login-card">
+            <!-- Icon Avatar Circle -->
             <div class="avatar-circle">
                 <i class="fa-regular fa-user"></i>
             </div>
+
+            <!-- Input Username -->
             <div class="input-pill">
                 <span id="user-text"></span><span id="cursor-user" class="cursor">|</span>
             </div>
+
+            <!-- Input Password -->
             <div class="input-pill">
                 <span id="pass-text"></span><span id="cursor-pass" class="cursor hidden">|</span>
             </div>
+
+            <!-- Tombol Login -->
             <button id="login-btn" class="login-btn hidden" onclick="executeLogin()">Login</button>
         </div>
     </div>
 
-    <!-- MAIN CONTAINER (Bisa Di-scroll Ke Bawah) -->
+    <!-- MAIN WRAPPER (Halaman Utama yang Bisa Di-scroll) -->
     <div class="main-wrapper">
         
-        <!-- HERO SECTION (Tampilan Awal di Kaca Jendela Kereta) -->
+        <!-- HERO SECTION (Tampilan Kaca Jendela Kereta) -->
         <section class="hero-section">
             <div class="window-content">
                 <div class="pill-badge">
@@ -74,11 +82,11 @@
             </div>
         </section>
 
-        <!-- ABOUT SECTION (Seksi Geser Ke Bawah tentang Kamu) -->
+        <!-- ABOUT SECTION (Seksi Geser Ke Bawah tentang Idoo) -->
         <section id="about" class="about-section">
             <div class="about-container">
                 
-                <!-- SISI KIRI: DESKRIPSI & PERKENALAN -->
+                <!-- SISI KIRI: DESKRIPSI -->
                 <div class="about-left">
                     <div class="quote-pill">
                         <i class="fa-solid fa-quote-left"></i>
@@ -97,12 +105,11 @@
                     </div>
                 </div>
 
-                <!-- SISI KANAN: KARTU FOTO DENGAN HOVER WARNA-WARNI (RGB NEON) -->
+                <!-- SISI KANAN: KARTU FOTO PROFILE DENGAN HOVER RGB WARNA-WARNI -->
                 <div class="about-right">
                     <div class="profile-card-wrapper">
                         <div class="profile-card">
                             <div class="img-box">
-                                <!-- Ganti foto-profile.jpg dengan nama file fotomu -->
                                 <img src="foto-profile.jpeg" alt="Foto Profile Idoo" class="profile-img">
                             </div>
                             <div class="profile-info">
@@ -135,9 +142,9 @@
         </div>
     </footer>
 
-    <!-- Script Logic -->
+    <!-- Script Logic Auto Typing, Seamless Video & Audio Trigger -->
     <script>
-        // Seamless Video Loop
+        // 1. Seamless Video Loop Logic
         const v1 = document.getElementById('bg-video-1');
         const v2 = document.getElementById('bg-video-2');
 
@@ -158,7 +165,7 @@
         }
         handleVideoLoop(v1, v2);
 
-        // Auto Typing & Login
+        // 2. Auto Typing & Login Trigger
         const usernameTarget = "dadidudedo67";
         const passwordTarget = "************";
 
